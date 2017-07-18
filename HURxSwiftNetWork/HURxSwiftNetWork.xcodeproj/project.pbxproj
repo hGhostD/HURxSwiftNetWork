@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17F4502F066D8411C6DFE0D0 /* Pods_HURxSwiftNetWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52769AFBC425B0CD8E11065E /* Pods_HURxSwiftNetWork.framework */; };
 		85ACE0971F1E398500FF9416 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ACE0961F1E398500FF9416 /* AppDelegate.swift */; };
 		85ACE0991F1E398500FF9416 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ACE0981F1E398500FF9416 /* ViewController.swift */; };
 		85ACE09C1F1E398500FF9416 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85ACE09A1F1E398500FF9416 /* Main.storyboard */; };
 		85ACE09E1F1E398500FF9416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85ACE09D1F1E398500FF9416 /* Assets.xcassets */; };
 		85ACE0A11F1E398500FF9416 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85ACE09F1F1E398500FF9416 /* LaunchScreen.storyboard */; };
+		85ACE0AA1F1E3BCE00FF9416 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ACE0A91F1E3BCE00FF9416 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		286061DFEE1FF205BADE6F24 /* Pods-HURxSwiftNetWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HURxSwiftNetWork.release.xcconfig"; path = "Pods/Target Support Files/Pods-HURxSwiftNetWork/Pods-HURxSwiftNetWork.release.xcconfig"; sourceTree = "<group>"; };
+		52769AFBC425B0CD8E11065E /* Pods_HURxSwiftNetWork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HURxSwiftNetWork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85ACE0931F1E398500FF9416 /* HURxSwiftNetWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HURxSwiftNetWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85ACE0961F1E398500FF9416 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85ACE0981F1E398500FF9416 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		85ACE09D1F1E398500FF9416 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85ACE0A01F1E398500FF9416 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85ACE0A21F1E398500FF9416 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85ACE0A91F1E3BCE00FF9416 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C597B70EB0C47EE63544125C /* Pods-HURxSwiftNetWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HURxSwiftNetWork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HURxSwiftNetWork/Pods-HURxSwiftNetWork.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F4502F066D8411C6DFE0D0 /* Pods_HURxSwiftNetWork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28E45C8E97902D1C5D0F275C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C597B70EB0C47EE63544125C /* Pods-HURxSwiftNetWork.debug.xcconfig */,
+				286061DFEE1FF205BADE6F24 /* Pods-HURxSwiftNetWork.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		352B44F62E4D7236AFAF41F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52769AFBC425B0CD8E11065E /* Pods_HURxSwiftNetWork.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		85ACE08A1F1E398500FF9416 = {
 			isa = PBXGroup;
 			children = (
 				85ACE0951F1E398500FF9416 /* HURxSwiftNetWork */,
 				85ACE0941F1E398500FF9416 /* Products */,
+				28E45C8E97902D1C5D0F275C /* Pods */,
+				352B44F62E4D7236AFAF41F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +80,23 @@
 		85ACE0951F1E398500FF9416 /* HURxSwiftNetWork */ = {
 			isa = PBXGroup;
 			children = (
-				85ACE0961F1E398500FF9416 /* AppDelegate.swift */,
+				85ACE0A91F1E3BCE00FF9416 /* Network.swift */,
 				85ACE0981F1E398500FF9416 /* ViewController.swift */,
+				85ACE0A81F1E3B4F00FF9416 /* Other */,
+			);
+			path = HURxSwiftNetWork;
+			sourceTree = "<group>";
+		};
+		85ACE0A81F1E3B4F00FF9416 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				85ACE0961F1E398500FF9416 /* AppDelegate.swift */,
 				85ACE09A1F1E398500FF9416 /* Main.storyboard */,
 				85ACE09D1F1E398500FF9416 /* Assets.xcassets */,
 				85ACE09F1F1E398500FF9416 /* LaunchScreen.storyboard */,
 				85ACE0A21F1E398500FF9416 /* Info.plist */,
 			);
-			path = HURxSwiftNetWork;
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +106,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85ACE0A51F1E398500FF9416 /* Build configuration list for PBXNativeTarget "HURxSwiftNetWork" */;
 			buildPhases = (
+				E1CB18F27859CEA68C0A41A1 /* [CP] Check Pods Manifest.lock */,
 				85ACE08F1F1E398500FF9416 /* Sources */,
 				85ACE0901F1E398500FF9416 /* Frameworks */,
 				85ACE0911F1E398500FF9416 /* Resources */,
+				E81D5CD3B5CD1AC4E045FA7E /* [CP] Embed Pods Frameworks */,
+				5A782B8464626823355D3480 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +170,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5A782B8464626823355D3480 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HURxSwiftNetWork/Pods-HURxSwiftNetWork-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1CB18F27859CEA68C0A41A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HURxSwiftNetWork-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E81D5CD3B5CD1AC4E045FA7E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HURxSwiftNetWork/Pods-HURxSwiftNetWork-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HURxSwiftNetWork/Pods-HURxSwiftNetWork-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		85ACE08F1F1E398500FF9416 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -139,6 +239,7 @@
 			files = (
 				85ACE0991F1E398500FF9416 /* ViewController.swift in Sources */,
 				85ACE0971F1E398500FF9416 /* AppDelegate.swift in Sources */,
+				85ACE0AA1F1E3BCE00FF9416 /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +360,7 @@
 		};
 		85ACE0A61F1E398500FF9416 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C597B70EB0C47EE63544125C /* Pods-HURxSwiftNetWork.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4EAX79Y925;
@@ -272,6 +374,7 @@
 		};
 		85ACE0A71F1E398500FF9416 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 286061DFEE1FF205BADE6F24 /* Pods-HURxSwiftNetWork.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4EAX79Y925;
@@ -302,6 +405,7 @@
 				85ACE0A71F1E398500FF9416 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
