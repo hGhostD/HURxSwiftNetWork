@@ -116,6 +116,7 @@ extension String : StringProtocol {}
 
 extension Observable where Element: StringProtocol {
     func common() -> Observable<JSON> {
+
         return self
             .catchError({ (error) -> Observable<Element> in
                 /// 统一的错误处理逻辑
