@@ -12,29 +12,32 @@ import RxSwift
 
 class ViewController: UIViewController {
 
-
-    let button = UIButton(type: .custom)
     let bag = DisposeBag.init()
+    let textField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view, typically from a nib.
-        button.backgroundColor = UIColor.blue
-        button.bounds = CGRect(x: 0, y: 0, width: 120, height: 80)
-        button.center = self.view.center
-        self.view.addSubview(button)
+        textField.frame = CGRect(x: 20, y: 20, width: self.view.frame.size.width - 40, height: 40)
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.borderWidth = 1
+        self.view.addSubview(textField)
 
         setupRx()
     }
 
-    func setupRx() {
-        button.rx.tap.subscribe(onNext:{
-
-            Network.default.rx_json(.get, Network.default.baseUrl).subscribe({ (json) in
-                print(json)
-            }).addDisposableTo(self.bag)
+    func setupRx () {
+        textField.rx.text.filter{
+                ($0?.characters.count)! > 4
+            }.throttle(1, scheduler: MainScheduler.instance)
+            .flatMap {
+                Network.default.searchForGithub(name: $0!)
+            }.subscribe(onNext:{
+                let count = $0["total_count"]
+                let item = $0["item"]
+               
         }).addDisposableTo(self.bag)
     }
-
 }
 
