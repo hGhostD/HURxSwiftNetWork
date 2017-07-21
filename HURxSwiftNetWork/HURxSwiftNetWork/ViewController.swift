@@ -36,6 +36,8 @@ class ViewController: UIViewController {
             }.subscribe(onNext:{
                 let count = $0["total_count"]
                 let item = $0["item"]
+
+                print($0,count,item)
                
         }).addDisposableTo(self.bag)
     }
