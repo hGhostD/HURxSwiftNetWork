@@ -9,6 +9,7 @@ target 'HURxSwiftNetWork' do
   pod 'Alamofire', '~> 4.5.0'
   pod 'SwiftyJSON', '~> 3.1.4'
   pod 'RxAlamofire', '~> 3.0.3'
+  pod 'RxDataSources', '~> 1.0.4'
   # Pods for HURxSwiftNetWork
 
 end

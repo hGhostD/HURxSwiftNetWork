@@ -65,7 +65,7 @@ class Network {
 
     func searchForGithub (name: String) -> Observable<infoType> {
         return Observable.create({ (observer: AnyObserver<infoType>) -> Disposable in
-            let url = "https://api.github.com/search/repositories"
+            let url = "http://api.github.com/search/repositories"
             let paramaters = [
                 "q": name + " stars:>=2000"
             ]

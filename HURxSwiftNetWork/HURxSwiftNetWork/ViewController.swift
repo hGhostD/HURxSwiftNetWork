@@ -12,9 +12,11 @@ import RxSwift
 
 class ViewController: UIViewController {
 
+//    var dataArray = Variable<[]>
+
     let bag = DisposeBag.init()
     let textField = UITextField()
-
+    let tableView = UITableView(frame: CGRect(x: 0, y: 60, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 60), style: .plain)
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +26,10 @@ class ViewController: UIViewController {
         textField.layer.borderWidth = 1
         self.view.addSubview(textField)
 
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
         setupRx()
     }
 
@@ -36,9 +42,8 @@ class ViewController: UIViewController {
             }.subscribe(onNext:{
                 let count = $0["total_count"]
                 let item = $0["item"]
-
-                print($0,count,item)
-               
+            },onError:{
+                print($0)
         }).addDisposableTo(self.bag)
     }
 }
