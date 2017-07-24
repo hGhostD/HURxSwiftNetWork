@@ -9,8 +9,8 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    let title = UILabel.init(frame: CGRect(x: 20, y: 0, width: 120, height: 24))
-    let detail = UILabel.init(frame: CGRect(x: 20, y: 24, width: 120, height: 20))
+    let title = UILabel(frame: CGRect(x: 20, y: 0, width: 120, height: 24))
+    let detail = UILabel(frame: CGRect(x: 20, y: 24, width: 120, height: 20))
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

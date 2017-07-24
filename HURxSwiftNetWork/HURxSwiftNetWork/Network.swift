@@ -69,12 +69,10 @@ class Network {
             let paramaters = [
                 "q": name + " stars:>=2000"
             ]
-            print(url,paramaters)
             let request = Alamofire.request(url, method: .get, parameters: paramaters, encoding: URLEncoding.queryString, headers: nil)
             .responseJSON{ (response) in
                 switch response.result {
                 case .success(let json):
-                    print(json)
                     observer.onNext(self.parseResponse(response: json))
                     observer.onCompleted()
                 case .failure(let error):
@@ -96,21 +94,17 @@ extension Network {
 
         var ret : infoType = [
             "total_count" : totalCount ,
-            "items" : []
+            "items" : [Model]() 
         ]
 
         if totalCount != 0 {
             let items = json["items"]
-            var info : [infoType] = []
+            var info : [Model] = []
 
             for (_,subJson) :(String,JSON) in items {
                 let fullName = subJson["full_name"].stringValue
                 let description = subJson["description"].stringValue
-
-                info.append([
-                    "full_name" : fullName,
-                    "description" : description
-                ])
+                info.append(Model(full_name: fullName, description: description))
             }
 
             ret["items"] = info

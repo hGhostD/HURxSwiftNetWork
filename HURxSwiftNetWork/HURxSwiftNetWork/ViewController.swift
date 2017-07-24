@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import RxDataSources
 
 class ViewController: UIViewController {
 
@@ -26,9 +27,9 @@ class ViewController: UIViewController {
         textField.layer.borderWidth = 1
         self.view.addSubview(textField)
 
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
+//        tableView.delegate = self
+//        tableView.dataSource = self
         self.view.addSubview(tableView)
         setupRx()
     }
@@ -40,11 +41,33 @@ class ViewController: UIViewController {
             .flatMap {
                 Network.default.searchForGithub(name: $0!)
             }.subscribe(onNext:{
-                let count = $0["total_count"]
-                let item = $0["item"]
+                self.tableView.dataSource = nil
+                print($0["items"]!)
+
+                typealias O = Observable<[Model]>
+                typealias CC = (Int,Model,TableViewCell) -> Void
+//                let binder: (O) -> (CC) -> Disposable = self.tableView.rx.items(cellIdentifier:"cell",
+//                    cellType: TableViewCell.self
+//                )
+
+                let curried = {(row:Int,element:Model,cell: TableViewCell) in
+                    cell.title.text = element.full_name
+                    cell.detail.text = element.full_name
+                }
+                Observable.just($0)
+                    .bind(to: self.tableView.rx.items(cellIdentifier: "cell", cellType: TableViewCell.self), curriedArgument: curried)
+                .addDisposableTo(self.bag)
+
+
             },onError:{
-                print($0)
+                self.displayErrorAlert(error: $0)
         }).addDisposableTo(self.bag)
+    }
+
+    func displayErrorAlert(error: Error) {
+        let alert = UIAlertController(title: "网络错误", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

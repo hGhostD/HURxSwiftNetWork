@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		17F4502F066D8411C6DFE0D0 /* Pods_HURxSwiftNetWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52769AFBC425B0CD8E11065E /* Pods_HURxSwiftNetWork.framework */; };
+		850B19BA1F26354B0068692C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B19B91F26354B0068692C /* Model.swift */; };
 		8535376F1F24D9C2005284F8 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8535376E1F24D9C2005284F8 /* TableViewDelegate.swift */; };
 		853537711F24DB33005284F8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853537701F24DB33005284F8 /* TableViewCell.swift */; };
 		85ACE0971F1E398500FF9416 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ACE0961F1E398500FF9416 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		286061DFEE1FF205BADE6F24 /* Pods-HURxSwiftNetWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HURxSwiftNetWork.release.xcconfig"; path = "Pods/Target Support Files/Pods-HURxSwiftNetWork/Pods-HURxSwiftNetWork.release.xcconfig"; sourceTree = "<group>"; };
 		52769AFBC425B0CD8E11065E /* Pods_HURxSwiftNetWork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HURxSwiftNetWork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		850B19B91F26354B0068692C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8535376E1F24D9C2005284F8 /* TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 		853537701F24DB33005284F8 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		85ACE0931F1E398500FF9416 /* HURxSwiftNetWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HURxSwiftNetWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +86,7 @@
 		85ACE0951F1E398500FF9416 /* HURxSwiftNetWork */ = {
 			isa = PBXGroup;
 			children = (
+				850B19B91F26354B0068692C /* Model.swift */,
 				85ACE0A91F1E3BCE00FF9416 /* Network.swift */,
 				85ACE0981F1E398500FF9416 /* ViewController.swift */,
 				8535376E1F24D9C2005284F8 /* TableViewDelegate.swift */,
@@ -248,6 +251,7 @@
 				853537711F24DB33005284F8 /* TableViewCell.swift in Sources */,
 				8535376F1F24D9C2005284F8 /* TableViewDelegate.swift in Sources */,
 				85ACE0991F1E398500FF9416 /* ViewController.swift in Sources */,
+				850B19BA1F26354B0068692C /* Model.swift in Sources */,
 				85ACE0971F1E398500FF9416 /* AppDelegate.swift in Sources */,
 				85ACE0AA1F1E3BCE00FF9416 /* Network.swift in Sources */,
 			);
