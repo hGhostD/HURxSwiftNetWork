@@ -8,18 +8,19 @@
 
 import UIKit
 
-//extension ViewController : UITableViewDelegate {
-//
-//}
-//
-//extension ViewController : UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-//        cell?.textLabel?.text = String(indexPath.row)
-//        return cell!
-//    }
-//}
+extension ViewController : UITableViewDelegate {
+
+}
+
+extension ViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 40
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableViewCell
+        cell.title.text = String(indexPath.row)
+        cell.detail.text = String(indexPath.row)
+        return cell
+    }
+}
