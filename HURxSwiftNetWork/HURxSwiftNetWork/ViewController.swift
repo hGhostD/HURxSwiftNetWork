@@ -27,15 +27,12 @@ class ViewController: UIViewController {
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 1
         self.view.addSubview(textField)
-//        tableView.delegate = self
-//        tableView.dataSource = self
+
         view.addSubview(tableView)
         setupRx()
         
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
 
-        
-        
         //使用数据初始化cell
 //        let items = Observable.just(
 //            (0...20).map{ "\($0)" }
@@ -48,6 +45,11 @@ class ViewController: UIViewController {
     }
 
     func setupRx () {
+        typealias O = Observable<[Model]>
+        typealias CC = (Int,Model,TableViewCell) -> Void
+
+//        let binder : (O) -> (CC) -> (Void) -> Disposable = self.tableView.rx.items(cellIdentifier: "cell", cellType: TableViewCell())
+
         textField.rx.text.filter{
                 ($0?.characters.count)! > 4
             }.throttle(1, scheduler: MainScheduler.instance)
@@ -55,23 +57,14 @@ class ViewController: UIViewController {
                 Network.default.searchForGithub(name: $0!)
             }.subscribe(onNext:{
                 self.tableView.dataSource = nil
-                print($0["items"]!)
-                let model = $0["items"]
-                
+                let model = $0
 
-                typealias O = Observable<[Model]>
-                typealias CC = (Int,Model,TableViewCell) -> Void
-//                let binder : (O) -> (CC) -> Disposable = self.tableView.rx.items(cellIdentifier:"Cell", cellType: TableViewCell())
+                print(model)
 
-                let curried = {(row:Int,element:Model,cell: TableViewCell) in
-                    cell.title.text = element.full_name
-                    cell.detail.text = element.full_name
-                    
-                }
-                
                 Observable.just($0).bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self)){
                     (row, elememt, cell: TableViewCell) in
-                    cell.title.text = "\(elememt) @row \(row)"
+                    cell.title.text = elememt.full_name
+                    cell.detail.text = elememt.description
                     }.disposed(by: self.bag)
                 
 

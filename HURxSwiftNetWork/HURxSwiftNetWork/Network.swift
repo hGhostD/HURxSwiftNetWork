@@ -63,8 +63,8 @@ class Network {
         return newParameters
     }
 
-    func searchForGithub (name: String) -> Observable<infoType> {
-        return Observable.create({ (observer: AnyObserver<infoType>) -> Disposable in
+    func searchForGithub (name: String) -> Observable<[Model]> {
+        return Observable.create({ (observer: AnyObserver<[Model]>) -> Disposable in
             let url = "http://api.github.com/search/repositories"
             let paramaters = [
                 "q": name + " stars:>=2000"
@@ -88,7 +88,7 @@ class Network {
 }
 
 extension Network {
-    fileprivate func parseResponse(response: Any) -> infoType {
+    fileprivate func parseResponse(response: Any) -> [Model] {
         let json = JSON(response)
         let totalCount = json["total_count"].intValue
 
@@ -109,6 +109,6 @@ extension Network {
 
             ret["items"] = info
         }
-        return ret
+        return ret["items"] as! [Model]
     }
 }
