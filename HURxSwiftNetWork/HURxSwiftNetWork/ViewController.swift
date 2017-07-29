@@ -13,20 +13,14 @@ import RxDataSources
 
 class ViewController: UIViewController {
 
-//    var dataArray = Variable<[]>
+    var dataArray = Variable<[Int]>([])
 
     let bag = DisposeBag.init()
-    let textField = UITextField()
-    let tableView = UITableView(frame: CGRect(x: 0, y: 60, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 60), style: .plain)
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Model>>()
-    
+    let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textField.frame = CGRect(x: 20, y: 20, width: self.view.frame.size.width - 40, height: 40)
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.layer.borderWidth = 1
-        self.view.addSubview(textField)
 
         view.addSubview(tableView)
         setupRx()
@@ -45,33 +39,18 @@ class ViewController: UIViewController {
     }
 
     func setupRx () {
-        typealias O = Observable<[Model]>
-        typealias CC = (Int,Model,TableViewCell) -> Void
 
-//        let binder : (O) -> (CC) -> (Void) -> Disposable = self.tableView.rx.items(cellIdentifier: "cell", cellType: TableViewCell())
+        for i in 0...40 {
+            dataArray.value.append(i)
+        }
 
-        textField.rx.text.filter{
-                ($0?.characters.count)! > 4
-            }.throttle(1, scheduler: MainScheduler.instance)
-            .flatMap {
-                Network.default.searchForGithub(name: $0!)
-            }.subscribe(onNext:{
-                self.tableView.dataSource = nil
-                let model = $0
+        let setCell = {(i: Int,e : Int,c: TableViewCell) in
+            c.title.text = String(e)
+        }
 
-                print(model)
+//        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).addDisposableTo(bag)
 
-                Observable.just($0).bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self)){
-                    (row, elememt, cell: TableViewCell) in
-                    cell.title.text = elememt.full_name
-                    cell.detail.text = elememt.description
-                    }.disposed(by: self.bag)
-                
-
-            },onError:{
-                self.displayErrorAlert(error: $0)
-        }).addDisposableTo(self.bag)
-        
+//        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self), curriedArgument: setCell).addDisposableTo(bag)
 
     }
 
