@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.5.0)
+  - MJRefresh (3.1.12)
   - RxAlamofire (3.0.3):
     - RxAlamofire/Core (= 3.0.3)
   - RxAlamofire/Core (3.0.3):
@@ -15,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5.0)
+  - MJRefresh (~> 3.1.12)
   - RxAlamofire (~> 3.0.3)
   - RxCocoa (~> 3.5.0)
   - RxDataSources (~> 1.0.4)
@@ -23,12 +25,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 008e1ce64ad5bf5d067fa142b6c0704d004949fc
+PODFILE CHECKSUM: 3691064c704edcf5fecca8118e90239e9e049897
 
 COCOAPODS: 1.3.0.beta.2

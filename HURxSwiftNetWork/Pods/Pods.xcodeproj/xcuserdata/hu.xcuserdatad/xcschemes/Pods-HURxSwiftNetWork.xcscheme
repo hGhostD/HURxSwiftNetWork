@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A394F0025076E3DA624FFB3074A30539"
+               BlueprintIdentifier = "052F6C6BA4D47919D3F11BAB19EB3473"
                BuildableName = "Pods_HURxSwiftNetWork.framework"
                BlueprintName = "Pods-HURxSwiftNetWork"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A394F0025076E3DA624FFB3074A30539"
+            BlueprintIdentifier = "052F6C6BA4D47919D3F11BAB19EB3473"
             BuildableName = "Pods_HURxSwiftNetWork.framework"
             BlueprintName = "Pods-HURxSwiftNetWork"
             ReferencedContainer = "container:Pods.xcodeproj">

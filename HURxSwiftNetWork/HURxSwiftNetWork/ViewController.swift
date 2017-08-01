@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxDataSources
+import MJRefresh
 
 class ViewController: UIViewController {
 
@@ -18,6 +19,12 @@ class ViewController: UIViewController {
     let bag = DisposeBag.init()
     let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
 
+    typealias SectionTableModel = SectionModel<String,Model>
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionTableModel>()
+    // 顶部刷新
+    let header = MJRefreshNormalHeader()
+    // 底部刷新
+    let footer = MJRefreshAutoNormalFooter()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +33,7 @@ class ViewController: UIViewController {
         setupRx()
         
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
-
+        upRefresh()
         //使用数据初始化cell
 //        let items = Observable.just(
 //            (0...20).map{ "\($0)" }
@@ -40,18 +47,32 @@ class ViewController: UIViewController {
 
     func setupRx () {
 
-        for i in 0...40 {
-            dataArray.value.append(i)
-        }
-
         let setCell = {(i: Int,e : Int,c: TableViewCell) in
             c.title.text = String(e)
         }
 
-//        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).addDisposableTo(bag)
+        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).addDisposableTo(bag)
 
-//        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self), curriedArgument: setCell).addDisposableTo(bag)
+        header.setRefreshingTarget(self, refreshingAction: #selector(upRefresh))
+        footer.setRefreshingTarget(self, refreshingAction: #selector(downRefresh))
+        self.tableView.mj_header = header
+        self.tableView.mj_footer = footer
+        
+    }
 
+    func upRefresh() {
+        dataArray.value.removeAll()
+        for i in 0...10 {
+            dataArray.value.append(i)
+        }
+        self.tableView.mj_header.endRefreshing()
+    }
+
+    func downRefresh() {
+        for i in dataArray.value.last!..<dataArray.value.last! + 10 {
+            dataArray.value.append(i)
+        }
+        self.tableView.mj_footer.endRefreshing()
     }
 
     func displayErrorAlert(error: Error) {

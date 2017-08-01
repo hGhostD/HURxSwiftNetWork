@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HURxSwiftNetWork.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>756A720F285B37A7430059B75070BB0D</key>
+		<key>052F6C6BA4D47919D3F11BAB19EB3473</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>44D1A5C42FD86314B3460570D63566D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5B3B01AFAF98BDCEDC4F150A1C2F82BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,27 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EDF792A33584D82BEB2C6A5DF91E22D</key>
+		<key>9CBF8EC5E2BFA0C0AB0E49741C331CC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A394F0025076E3DA624FFB3074A30539</key>
+		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B5CBE8D58918339AEC368E3D6543F633</key>
+		<key>E40C03A4B0F9AFCB56C239C4C4DCAE6F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C203E3C2F98E50394538CEA576AC5A4A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D702A8FA8602FCEBD04AC83C07B0476F</key>
+		<key>EC94335CD3B4DE2320585266C80C06CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
