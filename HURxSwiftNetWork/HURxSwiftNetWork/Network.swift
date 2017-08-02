@@ -12,20 +12,6 @@ import Alamofire
 import SwiftyJSON
 import RxAlamofire
 
-typealias infoType = Dictionary<String,Any>
-
-enum ErrorCode: Int {
-    case `default` = -11110
-    case json = -11111
-    case parameter = -11112
-}
-
-enum ErrorMessage: String {
-    case `default` = "网络状态不佳，请稍候再试!"
-    case json = "服务器数据解析错误!"
-    case parameter = "参数错误，请稍候再试!"
-}
-
 
 class Network {
 
@@ -34,49 +20,26 @@ class Network {
         return Network()
     }()
 
-    // domain
-    let baseUrl = "https://api.tuchong.com/feed-app"
+    let baseUrl = "https://api.douban.com/v2/movie/in_theaters"
 
-    // For JSON
-    static let ok = "SUCCESS"
-    static let statusKey = "result"
-    static let messageKey = "message"
-    static let dataKey = "data"
+    let apikey = "0b2bdeda43b5688921839c8ecb20399b"
+    let city = "沈阳".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    let client = ""
+    let udid = ""
 
 
-    func commonParameters(parameters: [String: Any]?) -> [String: Any] {
-        var newParameters: [String: Any] = [:]
-        if parameters != nil {
-            newParameters = parameters!
-        }
-        newParameters["os_api"] = "22"
-        newParameters["device_type"] = "android"
-        newParameters["os_version"] = "5.8.1"
-        newParameters["ssmix"] = "a"
-        newParameters["manifest_version_code"] = "232"
-        newParameters["dpi"] = "400"
-        newParameters["abflag"] = "0"
-        newParameters["openudid"] = "65143269dafd1f3a5"
-        newParameters["app_name"] = "tuchong"
-        newParameters["uuid"] = "651384659521356"
+    func searchDouBan(start: String, count: String) -> Observable<[Model]> {
+        return Observable.create({ (oberver: AnyObserver<[Model]>) -> Disposable in
+            let parameter: [String: Any] = ["apikey":self.apikey,"city":self.city!,"client":self.client,"udid":self.udid,"start":start,"count":count]
 
-        return newParameters
-    }
+            let request = Alamofire.request(self.baseUrl, method: .post, parameters: parameter, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
 
-    func searchForGithub (name: String) -> Observable<[Model]> {
-        return Observable.create({ (observer: AnyObserver<[Model]>) -> Disposable in
-            let url = "http://api.github.com/search/repositories"
-            let paramaters = [
-                "q": name + " stars:>=2000"
-            ]
-            let request = Alamofire.request(url, method: .get, parameters: paramaters, encoding: URLEncoding.queryString, headers: nil)
-            .responseJSON{ (response) in
                 switch response.result {
-                case .success(let json):
-                    observer.onNext(self.parseResponse(response: json))
-                    observer.onCompleted()
                 case .failure(let error):
-                    observer.onError(error)
+                    print(error)
+                    oberver.onError(error)
+                case .success(let json):
+                    print(JSON(json))
                 }
             }
             return Disposables.create {
@@ -84,31 +47,13 @@ class Network {
             }
         })
     }
-    
 }
 
 extension Network {
-    fileprivate func parseResponse(response: Any) -> [Model] {
-        let json = JSON(response)
-        let totalCount = json["total_count"].intValue
+    fileprivate func changeJsonToModel(json: JSON) -> Array<Model> {
+        var array = [Model]()
 
-        var ret : infoType = [
-            "total_count" : totalCount ,
-            "items" : [Model]() 
-        ]
 
-        if totalCount != 0 {
-            let items = json["items"]
-            var info : [Model] = []
-
-            for (_,subJson) :(String,JSON) in items {
-                let fullName = subJson["full_name"].stringValue
-                let description = subJson["description"].stringValue
-                info.append(Model(full_name: fullName, description: description))
-            }
-
-            ret["items"] = info
-        }
-        return ret["items"] as! [Model]
+        return array
     }
 }

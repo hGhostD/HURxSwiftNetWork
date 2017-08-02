@@ -66,10 +66,14 @@ class ViewController: UIViewController {
             dataArray.value.append(i)
         }
         self.tableView.mj_header.endRefreshing()
+
+        Network.default.searchDouBan(start: "0", count: "10").subscribe(onNext:{
+            print($0)
+        }).addDisposableTo(bag)
     }
 
     func downRefresh() {
-        for i in dataArray.value.last!..<dataArray.value.last! + 10 {
+        for i in dataArray.value.last! + 1..<dataArray.value.last! + 10 {
             dataArray.value.append(i)
         }
         self.tableView.mj_footer.endRefreshing()

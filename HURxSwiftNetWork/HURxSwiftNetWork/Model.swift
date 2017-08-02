@@ -9,6 +9,5 @@
 import UIKit
 
 struct Model {
-    var full_name = ""
-    var description = ""
+ 
 }
