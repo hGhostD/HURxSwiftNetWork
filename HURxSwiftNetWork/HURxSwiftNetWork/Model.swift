@@ -7,7 +7,19 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 struct Model {
- 
+    let title: String
+    let images: Dictionary<String,JSON>
+    let genres: Array<JSON>
+
+    static func initWithModel(json: JSON) -> Model {
+        let title = json["title"].stringValue
+        let images = json["images"].dictionaryValue
+        let genres = json["genres"].arrayValue
+        let model = Model(title: title, images: images, genres: genres)
+        return model
+
+    }
 }

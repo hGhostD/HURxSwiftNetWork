@@ -9,8 +9,10 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    let title = UILabel(frame: CGRect(x: 20, y: 0, width: 300, height: 24))
-    let detail = UILabel(frame: CGRect(x: 20, y: 24, width: 300, height: 20))
+    let title = UILabel(frame: CGRect(x: 60, y: 10, width: 300, height: 24))
+    let detail = UILabel(frame: CGRect(x: 60, y: 30, width: 300, height: 20))
+    let headerImage = UIImageView(frame: CGRect(x: 20, y: 10, width: 40, height: 40))
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,6 +38,7 @@ class TableViewCell: UITableViewCell {
     func setupUI () {
         title.font = UIFont(descriptor: .init(), size: 16)
         detail.font = UIFont(descriptor: .init(), size: 14)
+        self.contentView.addSubview(headerImage)
         self.contentView.addSubview(title)
         self.contentView.addSubview(detail)
     }

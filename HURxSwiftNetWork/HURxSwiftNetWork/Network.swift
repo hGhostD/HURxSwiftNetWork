@@ -39,10 +39,13 @@ class Network {
                     print(error)
                     oberver.onError(error)
                 case .success(let json):
-                    print(JSON(json))
+                    let modelArr = self.changeJsonToModel(json: JSON(json))
+                    oberver.onNext(modelArr)
+                    oberver.onCompleted()
                 }
             }
             return Disposables.create {
+                print("取消")
                 request.cancel()
             }
         })
@@ -51,9 +54,10 @@ class Network {
 
 extension Network {
     fileprivate func changeJsonToModel(json: JSON) -> Array<Model> {
-        var array = [Model]()
-
-
+        let array: [Model] = json["subjects"].arrayValue.map {
+//            let model = Model(title: jsonModel["title"].stringValue, images: jsonModel["images"].dictionaryValue, genres: jsonModel["genres"].arrayValue)
+            return Model.initWithModel(json: $0)
+        }
         return array
     }
 }

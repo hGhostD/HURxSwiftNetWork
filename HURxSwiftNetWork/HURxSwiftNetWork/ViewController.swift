@@ -14,7 +14,7 @@ import MJRefresh
 
 class ViewController: UIViewController {
 
-    var dataArray = Variable<[Int]>([])
+    var dataArray = Variable<[Model]>([])
 
     let bag = DisposeBag.init()
     let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
@@ -31,7 +31,8 @@ class ViewController: UIViewController {
 
         view.addSubview(tableView)
         setupRx()
-        
+
+        tableView.rowHeight = 60
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         upRefresh()
         //使用数据初始化cell
@@ -47,8 +48,12 @@ class ViewController: UIViewController {
 
     func setupRx () {
 
-        let setCell = {(i: Int,e : Int,c: TableViewCell) in
-            c.title.text = String(e)
+        let setCell = {(i: Int,e : Model,c: TableViewCell) in
+            c.title.text = e.title
+            c.detail.text = e.genres.first?.stringValue
+            let url = e.images["large"]?.stringValue
+            let data = try? Data.init(contentsOf: URL(string: url!)!)
+            c.headerImage.image = UIImage(data: data!)
         }
 
         dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).addDisposableTo(bag)
@@ -61,28 +66,27 @@ class ViewController: UIViewController {
     }
 
     func upRefresh() {
-        dataArray.value.removeAll()
-        for i in 0...10 {
-            dataArray.value.append(i)
-        }
-        self.tableView.mj_header.endRefreshing()
 
-        Network.default.searchDouBan(start: "0", count: "10").subscribe(onNext:{
-            print($0)
+        self.tableView.mj_header.endRefreshing()
+        Network.default.searchDouBan(start: "0", count: "20").subscribe(onNext:{
+            self.dataArray.value.removeAll()
+
+            _ = $0.map { model in
+                self.dataArray.value.append(model)
+            }
         }).addDisposableTo(bag)
     }
 
     func downRefresh() {
-        for i in dataArray.value.last! + 1..<dataArray.value.last! + 10 {
-            dataArray.value.append(i)
-        }
+
         self.tableView.mj_footer.endRefreshing()
+        Network.default.searchDouBan(start: "1", count: "20").subscribe(onNext:{
+            print($0)
+            _ = $0.map { model in
+                self.dataArray.value.append(model)
+            }
+        }).addDisposableTo(bag)
     }
 
-    func displayErrorAlert(error: Error) {
-        let alert = UIAlertController(title: "网络错误", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
 }
 
