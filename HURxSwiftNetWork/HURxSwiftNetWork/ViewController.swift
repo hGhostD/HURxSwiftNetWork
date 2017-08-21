@@ -15,7 +15,7 @@ import MJRefresh
 class ViewController: UIViewController {
 
     var dataArray = Variable<[Model]>([])
-
+    var page = 0
     let bag = DisposeBag.init()
     let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
 
@@ -44,6 +44,12 @@ class ViewController: UIViewController {
 //                (row, elememt, cell) in
 //                cell.textLabel?.text = "\(elememt) @row \(row)"
 //            }.disposed(by: bag)
+
+        Observable.of(1,2,3,4).toArray()
+            .subscribe(onNext:{
+                dump(type(of: $0))
+                dump($0)
+            }).addDisposableTo(bag)
     }
 
     func setupRx () {
@@ -51,7 +57,7 @@ class ViewController: UIViewController {
         let setCell = {(i: Int,e : Model,c: TableViewCell) in
             c.title.text = e.title
             c.detail.text = e.genres.first?.stringValue
-            let url = e.images["large"]?.stringValue
+            let url = e.images["small"]?.stringValue
             let data = try? Data.init(contentsOf: URL(string: url!)!)
             c.headerImage.image = UIImage(data: data!)
         }
@@ -66,10 +72,10 @@ class ViewController: UIViewController {
     }
 
     func upRefresh() {
-
-        self.tableView.mj_header.endRefreshing()
-        Network.default.searchDouBan(start: "0", count: "20").subscribe(onNext:{
-            self.dataArray.value.removeAll()
+        dataArray.value.removeAll()
+        page = 1
+        Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
+            self.tableView.mj_header.endRefreshing()
 
             _ = $0.map { model in
                 self.dataArray.value.append(model)
@@ -79,9 +85,10 @@ class ViewController: UIViewController {
 
     func downRefresh() {
 
-        self.tableView.mj_footer.endRefreshing()
-        Network.default.searchDouBan(start: "1", count: "20").subscribe(onNext:{
-            print($0)
+        page += 1
+        Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
+            self.tableView.mj_footer.endRefreshing()
+
             _ = $0.map { model in
                 self.dataArray.value.append(model)
             }
