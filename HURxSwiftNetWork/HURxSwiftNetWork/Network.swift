@@ -54,7 +54,7 @@ class Network {
 extension Network {
     fileprivate func changeJsonToModel(json: JSON) -> Array<Model> {
         let array: [Model] = json["subjects"].arrayValue.map {
-            return Model.initWithModel(json: $0)
+            return Model($0)
         }
         return array
     }
