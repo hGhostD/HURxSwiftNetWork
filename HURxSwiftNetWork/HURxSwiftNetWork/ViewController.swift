@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 
     var dataArray = Variable<[Model]>([])
     var page = 0
-    let bag = DisposeBag.init()
+    let bag = DisposeBag()
     let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
 
     typealias SectionTableModel = SectionModel<String,Model>
@@ -27,33 +27,17 @@ class ViewController: UIViewController {
     let footer = MJRefreshAutoNormalFooter()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
         view.addSubview(tableView)
         setupRx()
 
         tableView.rowHeight = 60
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         upRefresh()
-        //使用数据初始化cell
-//        let items = Observable.just(
-//            (0...20).map{ "\($0)" }
-//        )
-//        items
-//            .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)){
-//                (row, elememt, cell) in
-//                cell.textLabel?.text = "\(elememt) @row \(row)"
-//            }.disposed(by: bag)
-
-        Observable.of(1,2,3,4).toArray()
-            .subscribe(onNext:{
-                dump(type(of: $0))
-                dump($0)
-            }).addDisposableTo(bag)
     }
 
     func setupRx () {
-
+        
         let setCell = {(i: Int,e : Model,c: TableViewCell) in
             c.title.text = e.title
             c.detail.text = e.genres.first?.stringValue
@@ -63,12 +47,17 @@ class ViewController: UIViewController {
         }
 
         dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).addDisposableTo(bag)
-
+        
+        
         header.setRefreshingTarget(self, refreshingAction: #selector(upRefresh))
         footer.setRefreshingTarget(self, refreshingAction: #selector(downRefresh))
         self.tableView.mj_header = header
         self.tableView.mj_footer = footer
         
+        tableView.rx.itemSelected.subscribe(onNext: {
+            self.tableView.cellForRow(at: $0)?.isSelected = false
+            print("点解",$0)
+        }).addDisposableTo(bag)
     }
 
     func upRefresh() {
@@ -84,7 +73,6 @@ class ViewController: UIViewController {
     }
 
     func downRefresh() {
-
         page += 1
         Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
             self.tableView.mj_footer.endRefreshing()
@@ -94,6 +82,4 @@ class ViewController: UIViewController {
             }
         }).addDisposableTo(bag)
     }
-
 }
-

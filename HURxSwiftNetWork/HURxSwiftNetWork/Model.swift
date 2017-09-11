@@ -14,12 +14,10 @@ struct Model {
     let images: Dictionary<String,JSON>
     let genres: Array<JSON>
 
-    static func initWithModel(json: JSON) -> Model {
-        let title = json["title"].stringValue
-        let images = json["images"].dictionaryValue
-        let genres = json["genres"].arrayValue
-        let model = Model(title: title, images: images, genres: genres)
-        return model
-
+    init(_ json: JSON) {
+        self.title = json["title"].stringValue
+        self.images = json["images"].dictionaryValue
+        self.genres = json["genres"].arrayValue
     }
 }
+
