@@ -1,37 +1,42 @@
 PODS:
-  - Alamofire (4.5.0)
-  - MJRefresh (3.1.12)
-  - RxAlamofire (3.0.3):
-    - RxAlamofire/Core (= 3.0.3)
-  - RxAlamofire/Core (3.0.3):
-    - Alamofire (~> 4.0)
-    - RxSwift (~> 3.0)
-  - RxCocoa (3.5.0):
-    - RxSwift (~> 3.4)
-  - RxDataSources (1.0.4):
-    - RxCocoa (~> 3.0)
-    - RxSwift (~> 3.0)
-  - RxSwift (3.5.0)
-  - SwiftyJSON (3.1.4)
+  - Alamofire (4.5.1)
+  - Differentiator (3.0.1)
+  - MJRefresh (3.1.14.1)
+  - Moya/Core (10.0.0):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Moya/RxSwift (10.0.0):
+    - Moya/Core
+    - RxSwift (~> 4.0)
+  - Result (3.2.4)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.1):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
+  - SwiftyJSON (4.0.0-alpha.1)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5.0)
-  - MJRefresh (~> 3.1.12)
-  - RxAlamofire (~> 3.0.3)
-  - RxCocoa (~> 3.5.0)
-  - RxDataSources (~> 1.0.4)
-  - RxSwift (~> 3.5.0)
-  - SwiftyJSON (~> 3.1.4)
+  - MJRefresh (~> 3.1.14.1)
+  - Moya/RxSwift (~> 10.0.0)
+  - RxCocoa (~> 4.0.0)
+  - RxDataSources (~> 3.0.1)
+  - RxSwift (~> 4.0.0)
+  - SwiftyJSON (~> 4.0.0-alpha.1)
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
-  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
-  RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
-  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
+  MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
+  Moya: adb58b0f4e58430db43cc6e2f6ebab1836501186
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  SwiftyJSON: dc88934f85fb50b263b1632b9cbad3402505783e
 
-PODFILE CHECKSUM: 3691064c704edcf5fecca8118e90239e9e049897
+PODFILE CHECKSUM: 9ee3a500cf76c4e5234a66f8206653e08c3251b0
 
-COCOAPODS: 1.3.0.beta.2
+COCOAPODS: 1.4.0.beta.1

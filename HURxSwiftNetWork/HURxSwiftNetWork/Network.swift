@@ -10,8 +10,7 @@ import UIKit
 import RxSwift
 import Alamofire
 import SwiftyJSON
-import RxAlamofire
-
+//import RxAlamofire
 
 class Network {
 
@@ -26,7 +25,6 @@ class Network {
     let city = "沈阳".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     let client = ""
     let udid = ""
-
 
     func searchDouBan(start: String, count: String) -> Observable<[Model]> {
         return Observable.create({ (oberver: AnyObserver<[Model]>) -> Disposable in
@@ -59,3 +57,4 @@ extension Network {
         return array
     }
 }
+

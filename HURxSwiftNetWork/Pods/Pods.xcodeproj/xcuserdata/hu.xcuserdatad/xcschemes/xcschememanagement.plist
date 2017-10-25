@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Differentiator.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Moya.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -19,7 +29,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>RxAlamofire.xcscheme</key>
+		<key>Result.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -46,47 +56,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>052F6C6BA4D47919D3F11BAB19EB3473</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>44D1A5C42FD86314B3460570D63566D4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5B3B01AFAF98BDCEDC4F150A1C2F82BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9CBF8EC5E2BFA0C0AB0E49741C331CC5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E14A62900910444707A5504D25EC98DC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E40C03A4B0F9AFCB56C239C4C4DCAE6F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EC94335CD3B4DE2320585266C80C06CF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

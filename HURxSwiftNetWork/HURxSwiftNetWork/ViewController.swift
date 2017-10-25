@@ -18,9 +18,15 @@ class ViewController: UIViewController {
     var page = 0
     let bag = DisposeBag()
     let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
-
+    let setCell = {(i: Int,e : Model,c: TableViewCell) in
+        c.title.text = e.title
+        c.detail.text = e.genres.first?.stringValue
+        let url = e.images["small"]?.stringValue
+        let data = try? Data(contentsOf: URL(string: url!)!)
+        c.headerImage.image = UIImage(data: data!)
+    }
     typealias SectionTableModel = SectionModel<String,Model>
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionTableModel>()
+//    let dataSource = RxTableViewSectionedReloadDataSource<SectionTableModel>(configureCell:configureCell: )
     // 顶部刷新
     let header = MJRefreshNormalHeader()
     // 底部刷新
@@ -37,17 +43,8 @@ class ViewController: UIViewController {
     }
 
     func setupRx () {
-        
-        let setCell = {(i: Int,e : Model,c: TableViewCell) in
-            c.title.text = e.title
-            c.detail.text = e.genres.first?.stringValue
-            let url = e.images["small"]?.stringValue
-            let data = try? Data.init(contentsOf: URL(string: url!)!)
-            c.headerImage.image = UIImage(data: data!)
-        }
 
-        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).addDisposableTo(bag)
-        
+        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).disposed(by: bag)
         
         header.setRefreshingTarget(self, refreshingAction: #selector(upRefresh))
         footer.setRefreshingTarget(self, refreshingAction: #selector(downRefresh))
@@ -56,11 +53,11 @@ class ViewController: UIViewController {
         
         tableView.rx.itemSelected.subscribe(onNext: {
             self.tableView.cellForRow(at: $0)?.isSelected = false
-            print("点解",$0)
-        }).addDisposableTo(bag)
+            print("点击",$0)
+        }).disposed(by: bag)
     }
 
-    func upRefresh() {
+    @objc func upRefresh() {
         dataArray.value.removeAll()
         page = 1
         Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
@@ -69,10 +66,10 @@ class ViewController: UIViewController {
             _ = $0.map { model in
                 self.dataArray.value.append(model)
             }
-        }).addDisposableTo(bag)
+        }).disposed(by: bag)
     }
 
-    func downRefresh() {
+    @objc func downRefresh() {
         page += 1
         Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
             self.tableView.mj_footer.endRefreshing()
@@ -80,6 +77,6 @@ class ViewController: UIViewController {
             _ = $0.map { model in
                 self.dataArray.value.append(model)
             }
-        }).addDisposableTo(bag)
+        }).disposed(by: bag)
     }
 }
