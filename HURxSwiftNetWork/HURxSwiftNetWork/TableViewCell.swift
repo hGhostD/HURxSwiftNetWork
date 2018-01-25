@@ -42,5 +42,14 @@ class TableViewCell: UITableViewCell {
         self.contentView.addSubview(title)
         self.contentView.addSubview(detail)
     }
+    
+    func setupWithModel(_ model: Model) {
+        self.title.text = model.title
+        self.detail.text = model.title
+        
+        let url = model.images["small"]?.stringValue
+        let data = try? Data(contentsOf: URL(string: url!)!)
+        self.headerImage.image = UIImage(data: data!)
+    }
 
 }

@@ -14,16 +14,17 @@ import MJRefresh
 
 class ViewController: UIViewController {
 
-    var dataArray = Variable<[Model]>([])
+    var dataArray = Variable<[SectionModel<String, Model>]>([])
     var page = 0
     let bag = DisposeBag()
     let tableView = UITableView(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20), style: .plain)
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Model>>(configureCell:{ (source, tableview, index, model) -> UITableViewCell in
+        let cell = tableview.dequeueReusableCell(withIdentifier: "Cell", for: index) as! TableViewCell
+        cell.setupWithModel(model)
+        return cell
+    })
     let setCell = {(i: Int,e : Model,c: TableViewCell) in
-        c.title.text = e.title
-        c.detail.text = e.genres.first?.stringValue
-        let url = e.images["small"]?.stringValue
-        let data = try? Data(contentsOf: URL(string: url!)!)
-        c.headerImage.image = UIImage(data: data!)
+        c.setupWithModel(e)
     }
     typealias SectionTableModel = SectionModel<String,Model>
 //    let dataSource = RxTableViewSectionedReloadDataSource<SectionTableModel>(configureCell:configureCell: )
@@ -44,7 +45,12 @@ class ViewController: UIViewController {
 
     func setupRx () {
 
-        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).disposed(by: bag)
+//        dataArray.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self))(setCell).disposed(by: bag)
+//        let closer = tableView.rx.items(dataSource: dataSource)
+        dataSource.titleForHeaderInSection = { ds, ii in
+            return ds.sectionModels[ii].model
+        }
+        dataArray.asObservable().bind(to: self.tableView.rx.items(dataSource: dataSource)).disposed(by: bag)
         
         header.setRefreshingTarget(self, refreshingAction: #selector(upRefresh))
         footer.setRefreshingTarget(self, refreshingAction: #selector(downRefresh))
@@ -55,6 +61,10 @@ class ViewController: UIViewController {
             self.tableView.cellForRow(at: $0)?.isSelected = false
             print("点击",$0)
         }).disposed(by: bag)
+        
+        tableView.rx.modelSelected(Model.self).subscribe(onNext: { (model) in
+            print(model)
+        }).disposed(by: bag)
     }
 
     @objc func upRefresh() {
@@ -63,9 +73,14 @@ class ViewController: UIViewController {
         Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
             self.tableView.mj_header.endRefreshing()
 
-            _ = $0.map { model in
-                self.dataArray.value.append(model)
-            }
+            let sec = SectionModel(model: "header", items: $0)
+            self.dataArray.value.append(sec)
+            
+//            _ = $0.map { model in
+//                let sec = SectionModel(model: "header", items: [model])
+//                self.dataArray.value.append(sec)
+//                self.dataArray.value.append(model)
+//            }
         }).disposed(by: bag)
     }
 
@@ -74,9 +89,13 @@ class ViewController: UIViewController {
         Network.default.searchDouBan(start: String(page), count: "10").subscribe(onNext:{
             self.tableView.mj_footer.endRefreshing()
 
-            _ = $0.map { model in
-                self.dataArray.value.append(model)
-            }
+            let sec = SectionModel(model: "header", items: $0)
+            self.dataArray.value.append(sec)
+            
+//            self.dataArray.value.append(sec)
+//            _ = $0.map { model in
+//                self.dataArray.value.append(model)
+//            }
         }).disposed(by: bag)
     }
 }
